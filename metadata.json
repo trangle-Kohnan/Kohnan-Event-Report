@@ -1,0 +1,5 @@
+{
+  "name": "Event Sales Reporter",
+  "description": "A comprehensive reporting tool to analyze event-specific sales from daily transaction data. It processes CSV daily sales files and filters them against event product lists to calculate net revenue, quantities, and top-selling items.",
+  "requestFramePermissions": []
+}
