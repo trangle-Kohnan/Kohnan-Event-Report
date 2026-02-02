@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { 
   BarChart3, 
@@ -21,7 +22,9 @@ import {
   ArrowDownWideNarrow,
   Sparkles,
   ChevronRight,
-  Info
+  Info,
+  XCircle,
+  CheckCircle2
 } from 'lucide-react';
 import { EventData, DailySaleRecord, ActiveTab } from './types';
 import { supabase } from './services/supabase';
@@ -245,6 +248,7 @@ const App: React.FC = () => {
     setIsAiLoading(true);
     setAiInsight(null);
     try {
+      // Fix: Correct way to initialize GoogleGenAI as per guidelines
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const prompt = `Bạn là một chuyên gia phân tích bán lẻ cao cấp. Hãy phân tích báo cáo doanh thu sự kiện sau:
       Sự kiện: ${reportDataResult.eventName}
@@ -261,6 +265,7 @@ const App: React.FC = () => {
         contents: prompt,
       });
 
+      // Fix: response.text is a property, not a method
       setAiInsight(response.text);
     } catch (err: any) {
       setErrorMessage("Lỗi phân tích AI: " + err.message);
@@ -322,12 +327,14 @@ const App: React.FC = () => {
         {/* Alerts */}
         {errorMessage && (
           <div className="mb-6 bg-rose-50 border border-rose-200 p-4 rounded-2xl flex items-center gap-3 text-rose-600 font-bold text-sm animate-in slide-in-from-top-4">
+            {/* Fix: XCircle is now imported from lucide-react */}
             <XCircle size={18} /> {errorMessage}
             <button onClick={() => setErrorMessage(null)} className="ml-auto opacity-50 hover:opacity-100"><Plus className="rotate-45" size={18} /></button>
           </div>
         )}
         {successMessage && (
           <div className="mb-6 bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex items-center gap-3 text-emerald-600 font-bold text-sm animate-in slide-in-from-top-4">
+            {/* Fix: CheckCircle2 is now imported from lucide-react */}
             <CheckCircle2 size={18} /> {successMessage}
           </div>
         )}
